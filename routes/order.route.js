@@ -35,13 +35,13 @@ orderRouter.get("/order/:id", async (req, res) => {
   }
 });
 
-orderRouter.put("/order/:id", async (req, res) => {
+orderRouter.patch("/order/:id", async (req, res) => {
   const ID = req.params.id;
   const playlod = req.body;
 
   try {
-    const order = await OrderModel.findByIdAndUpdate(ID, { status: playlod });
-    res.send("Successful", order);
+    const order = await OrderModel.findByIdAndUpdate(ID, playlod);
+    res.send({ msg: "Successful", order });
   } catch (error) {
     console.log("Error while updating", error);
     res.send("Error while updating");
